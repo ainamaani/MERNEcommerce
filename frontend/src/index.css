@@ -401,9 +401,12 @@ button:hover{
   background: #fff;
   margin: 15px;
   border-radius: 8px;
+  height: 280px;
 }
 .cartitemdetails{
   line-height: 0;
+  position: absolute;
+  left: 45%;
 }
 .cartitemdetails h3{
   color: #008CBA;
@@ -438,6 +441,82 @@ button:hover{
   height: 200px;
   border-radius: 6px;
   margin-right: 5px;
+}
+.cartempty{
+  background: #fff;
+  width: 400px;
+  position: relative;
+  left: 30%;
+  top: 40%;
+  padding: 10px;
+  text-align: center;
+  border-radius: 5px;
+}
+.cartempty a{
+  color: #fff;
+  background: #008CBA;
+  text-decoration: none;
+  padding: 8px;
+}
+.cartempty h4{
+  font-weight: lighter;
+}
+.cartticon{
+  background: #f1f1f1;
+  
+}
+.carticon{
+  font-size: 44px;
+}
+
+/* SEARCH */
+.search input{
+  background: #fff;
+  margin-top: 5px;
+  width:600px;
+  margin-left: 10px;
+  margin-right: 10px;
+  
+}
+.search{
+  display: flex;
+}
+.search button{
+  position: relative;
+  bottom: 6px;
+}
+
+/* Styles for the suggestions container */
+.suggestions {
+  display: none; /* Hide the suggestions by default */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #f9f9f9; /* Set a background color for the suggestions */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+/* Styles for showing the suggestions */
+.suggestions.show {
+  display: block;
+}
+
+/* Styles for each suggestion button */
+.suggestion-item {
+  display: block;
+  width: 100%;
+  padding: 8px;
+  border: none;
+  background-color: #f9f9f9; /* Set the same background color as the container */
+  text-align: left;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+  color: #000;
+}
+
+.suggestion-item:hover {
+  background-color: #f0f0f0;
 }
 
 

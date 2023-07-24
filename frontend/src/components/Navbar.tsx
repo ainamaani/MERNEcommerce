@@ -1,20 +1,27 @@
 import { Link,NavLink } from "react-router-dom";
-import React,{useEffect} from 'react';
+import React,{useEffect,useState} from 'react';
 import useLogout from "../hooks/UseLogout";
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useAuthContext from "../hooks/UseAuthContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 
 const Navbar = ():JSX.Element => {
     const {logout} = useLogout();
     const {user} = useAuthContext();
+    const [searchQuery,setSearchQuery] = useState('');
 
     const handleLogout = () =>{
         logout()
         toast.success('Logged out successfully!',{
             position: 'top-right'
         });
+    }
+
+    const handleSearchQuery = (e: React.ChangeEvent<HTMLInputElement>) =>{
+        setSearchQuery(e.target.value);
     }
 
     return ( 
@@ -36,6 +43,13 @@ const Navbar = ():JSX.Element => {
                     )}
                     {user && (
                         <div className="loggedin">
+                    
+                            <div className="search">
+                                <input type="text" placeholder="Search products" value={searchQuery} onChange={handleSearchQuery} />
+                                <button>Search</button>
+                                <FontAwesomeIcon className="searchicon" icon={faSearch}/>
+                            </div>
+                            
                             <div className="loggedinlinks">
                                 <ul>
                                     <li><a className="nav-link" href="/">Home</a></li>

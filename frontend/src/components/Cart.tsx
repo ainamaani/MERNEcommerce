@@ -1,8 +1,12 @@
 import React,{useEffect,useState} from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+
 
 interface CartItemsStructure{
     _id:string,
@@ -103,35 +107,47 @@ const Cart = ():JSX.Element => {
     return ( 
         <div className="cartpage">
             <div>
-                <h2>Item Cart</h2>
                 { cartitems ? (
-                    cartitems.map(item => {
-                        const finalPrice = parseFloat(item.price) * (parseFloat(item.discount) / 100)
-                        const totalPrice = parseFloat(item.price) * item.itemquantity;
-                        return(
-                        <div>
-                            <div className='cart'>
-                                <div className="cartimage">
-                                    <img src={item.itemPhotoUrl} alt="item"/>
-                                </div>
-                                <div className="cartitemdetails">
-                                    <h3>{item.title}</h3>
-                                    <div className="quantity">
-                                        <button onClick={()=> handleIncreaseQuantity(item._id)}>+</button>
-                                        <h4 className='itemquantity'>{item.itemquantity}</h4>
-                                        <button onClick={()=> handleDecreaseQuantity(item._id)} disabled={item.itemquantity === 1}>-</button>
+                    cartitems.length > 0 ? (
+                        cartitems.map(item => {
+                            const finalPrice = parseFloat(item.price) * (parseFloat(item.discount) / 100)
+                            const totalPrice = parseFloat(item.price) * item.itemquantity;
+                            return(
+                            <div>
+                                <div className='cart'>
+                                    <div className="cartimage">
+                                        <img src={item.itemPhotoUrl} alt="item"/>
                                     </div>
-
-                                    <h4>Total price: Ush.{finalPrice}</h4>
-                                    <h4 className='initialcartitemprice'>Ush.{item.price}</h4>
-                                    <div className="removeitem">
-                                        <button onClick={()=>removeItemFromCart(item._id)}>Remove item</button>
+                                    <div className="cartdets">
+                                        <div className="cartitemdetails">
+                                            <h3>{item.title}</h3>
+                                            <div className="quantity">
+                                                <button onClick={()=> handleIncreaseQuantity(item._id)}>+</button>
+                                                <h4 className='itemquantity'>{item.itemquantity}</h4>
+                                                <button onClick={()=> handleDecreaseQuantity(item._id)} disabled={item.itemquantity === 1}>-</button>
+                                            </div>
+    
+                                            <h4>Total price: Ush.{finalPrice}</h4>
+                                            <h4 className='initialcartitemprice'>Ush.{item.price}</h4>
+                                            <div className="removeitem">
+                                                <button onClick={()=>removeItemFromCart(item._id)}>Remove item</button>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            )
+                        })
+                    ):(
+                        <div className="cartempty">
+                            <div className="cartticon">
+                                <FontAwesomeIcon className='carticon' icon={faShoppingCart} />
+                            </div>
+                            <h4>Your cart is empty!!</h4>
+                            <Link to={'/products'}>Start shopping</Link>
                         </div>
-                        )
-                    })
+                    )
+                    
                 ):(
                     <p>Loading...</p>
                 )}
