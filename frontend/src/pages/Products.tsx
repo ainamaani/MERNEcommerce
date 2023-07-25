@@ -44,7 +44,6 @@ const Products = (): JSX.Element => {
           fetchSearchResults(searchQuery);
         }
       }, 345600000);
-
       // Clear the timeout on cleanup to prevent redundant searches
       return () => clearTimeout(debounceSearch);
     } else {
@@ -68,6 +67,8 @@ const Products = (): JSX.Element => {
     getProducts();
   }, [dispatch]);
 
+
+  //step two, the function called when the user is typing
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputQuery = e.target.value;
     setSearchQuery(inputQuery);
@@ -124,11 +125,11 @@ const Products = (): JSX.Element => {
   return (
     <div>
       <div className="search">
-        <input
+        <input  //step one. User types and as they type, the handleInputChange function is called.
           type="text"
           placeholder="Search product by title"
           value={searchQuery}
-          onChange={handleInputChange}
+          onChange={handleInputChange} 
         />
         <button
           onClick={() => {
@@ -145,7 +146,7 @@ const Products = (): JSX.Element => {
             className="suggestion-item"
             onClick={() => handleSuggestionClick(product)}
           >
-            {formatSuggestion(product.title, searchQuery)}
+            {formatSuggestion(product.title, searchQuery)}  
           </button>
         ))}
       </div>

@@ -14,6 +14,7 @@ const handleSignUp = async(req,res) =>{
         if(user){
             //create the user token
             const token = createToken(user._id);
+            const firstname = user.firstname;
             //create transport
             const transporter = nodemailer.createTransport({
                 service: 'gmail',
@@ -39,6 +40,7 @@ const handleSignUp = async(req,res) =>{
                     console.log("Email sent successfully" + info);
                 }
             })
+            //send token after the user signs up
             res.status(200).json({firstname,email,user,token});
         }else{
             res.status(400).json({error:"Failed to register new user"});
@@ -53,9 +55,12 @@ const handleLogin = async(req,res) =>{
 
     try {
         const user = await User.login(email,password);
+        console.log(user);
         if(user){
             const token = createToken(user._id)
-            res.status(200).json({ email, user ,token });
+            const firstname = user.firstname
+            res.status(200).json({ email, firstname ,token });
+            //send token after the user logs in
         }else{
             res.status(400).json({error:"Failed to login the user"});
         }

@@ -43,13 +43,8 @@ const Navbar = ():JSX.Element => {
                     )}
                     {user && (
                         <div className="loggedin">
-                    
-                            <div className="search">
-                                <input type="text" placeholder="Search products" value={searchQuery} onChange={handleSearchQuery} />
-                                <button>Search</button>
-                                <FontAwesomeIcon className="searchicon" icon={faSearch}/>
-                            </div>
-                            
+                            <p className="welcomee">Welcome <span className="welcome">{user.firstname} :)</span></p>
+
                             <div className="loggedinlinks">
                                 <ul>
                                     <li><a className="nav-link" href="/">Home</a></li>

@@ -519,8 +519,18 @@ button:hover{
   background-color: #f0f0f0;
 }
 
+/* WELCOME NAME */
+.welcome{
+  font-size: 24px;
+  color: #008CBA;
+  font-weight: 600;
+}
+.welcomee{
+  font-style: italic;
+  position: relative;
+  right: 70px;
 
-
+}
 
 
 
