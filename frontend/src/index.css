@@ -442,12 +442,12 @@ button:hover{
   border-radius: 6px;
   margin-right: 5px;
 }
-.cartempty{
+.empty .cartempty{
   background: #fff;
   width: 400px;
-  position: relative;
+  position: absolute;
   left: 30%;
-  top: 40%;
+  top: 36%;
   padding: 10px;
   text-align: center;
   border-radius: 5px;
@@ -530,6 +530,50 @@ button:hover{
   position: relative;
   right: 70px;
 
+}
+
+/* RECENTLY VIEWED */
+.recentlyviewed{
+  display: flex;
+  position: absolute;
+  top: 80%;
+  left: 10%;
+}
+.recentitem{
+  margin: 5px;
+  height: 350px;
+  background: #fff;
+  width: 230px;
+  border-radius: 8px;
+}
+.recentitempic img{
+  width: 230px;
+  height: 200px;
+  border-radius: 4px;
+}
+.recentitem h4{
+  font-size: 1.2em;
+  margin-left: 2px;
+}
+.recentitem p{
+  font-style: italic;
+  font-size: 1.1em;
+  margin-left: 0;
+}
+.recenthead{
+  position: absolute;
+  top: 75%;
+  left: 40%;
+}
+.recentitem .product-link{
+  position: relative;
+  right: 10px;
+}
+.recentitem .product-link a{
+  color: #fff;
+  font-weight: 300;
+  font-size: 16px;
+  margin-right: 0;
 }
 
 

@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import { ProductsContextProvider } from './contexts/ProductsContext';
 import AuthContextProvider from './contexts/AuthContext';
+import RecentlyViewedProvider from './contexts/RecentlyViewed';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -12,7 +13,9 @@ root.render(
   <React.StrictMode>
     <AuthContextProvider>
       <ProductsContextProvider>
-        <App />
+        <RecentlyViewedProvider>
+          <App />
+        </RecentlyViewedProvider>
       </ProductsContextProvider>
     </AuthContextProvider>
   </React.StrictMode>

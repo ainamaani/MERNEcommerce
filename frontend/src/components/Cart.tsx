@@ -5,8 +5,7 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { faShoppingCart } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
-
+import useRecentlyViewedContext from '../hooks/UseRecentlyViewedContext';
 
 interface CartItemsStructure{
     _id:string,
@@ -18,15 +17,28 @@ interface CartItemsStructure{
     discount:string
 }
 
+interface RecentlyViewed{
+    _id:string,
+    title:string,
+    price:string,
+    quantity:string,
+    discount:string,
+    description:string,
+    imageUrl:string
+}
+
 const Cart = ():JSX.Element => {
     const [cartitems, setCartItems] = useState<CartItemsStructure[] | null >(null);
     const [subTotal, setSubTotal] = useState<number>(0);
+    const { recentlyviewed,dispatch } = useRecentlyViewedContext();
+
+    console.log("Recently viewed", recentlyviewed);
+
 
     const fetchCartDetails = async() =>{
         try {
             const cartdetails = await axios.get<CartItemsStructure[]>(`http://localhost:9000/api/cart`)
             if(cartdetails.status === 200){
-                console.log(cartdetails.data)
                 setCartItems(cartdetails.data);
             }
         } catch (error) {
@@ -139,12 +151,34 @@ const Cart = ():JSX.Element => {
                             )
                         })
                     ):(
-                        <div className="cartempty">
-                            <div className="cartticon">
-                                <FontAwesomeIcon className='carticon' icon={faShoppingCart} />
+                        <div className='empty'>
+                            <div className="cartempty">
+                                <div className="cartticon">
+                                    <FontAwesomeIcon className='carticon' icon={faShoppingCart} />
+                                </div>
+                                <h4>Your cart is empty!!</h4>
+                                <Link to={'/products'}>Start shopping</Link>
+                            
                             </div>
-                            <h4>Your cart is empty!!</h4>
-                            <Link to={'/products'}>Start shopping</Link>
+                            <h3 className='recenthead'>Recently viewed</h3>
+                            <div className="recentlyviewed">
+                                {recentlyviewed &&
+                                    recentlyviewed[0].map((recentlyviewedproduct:RecentlyViewed) => (
+                                        <h5 key={recentlyviewedproduct._id}>
+                                        <div className="recentitem">
+                                            <div className="recentitempic">
+                                                <img src={recentlyviewedproduct.imageUrl} alt="photo" />
+    
+                                            </div>
+                                            <h4>{recentlyviewedproduct.title}</h4>
+                                            <p>{recentlyviewedproduct.price}</p>
+                                            <div className="product-link">
+                                                <Link to={`/product/${recentlyviewedproduct._id}`}>View product</Link>
+                                            </div>
+                                        </div>
+                                        </h5>
+                                ))}
+                            </div>
                         </div>
                     )
                     
